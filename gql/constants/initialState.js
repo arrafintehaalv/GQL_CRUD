@@ -10,7 +10,7 @@ export default {
       nidBack: '',
       authorizedPersonPhoto: '',
       eTin: '',
-      mobileNumber: ''
+      mobileNumber: '',
     },
     companyProfile: {
       __typename: 'CompanyProfile',
@@ -22,7 +22,7 @@ export default {
       tradeLicenceImage: '',
       vatRegistrationImage: '',
       jointStockImage: '',
-      storeImage: ''
-    }
-  }
+      storeImage: '',
+    },
+  },
 };

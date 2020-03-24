@@ -6,13 +6,18 @@ export const GET_QUERY = gql`
       id
       title {
         romaji
+        english
+        native
       }
     }
   }
 `;
 
 export const SET_QUERY = gql`
-  mutation setQuery($id: Int) {
-    setQuery(id: $id)
+  mutation($mediaId: Int, $status: MediaListStatus) {
+    SaveMediaListEntry(mediaId: $mediaId, status: $status) {
+      id
+      status
+    }
   }
 `;
