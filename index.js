@@ -8,8 +8,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: Platform.select({
-      ios: 'https://graphql.anilist.co',
-      android: 'https://graphql.anilist.co',
+      ios: 'http://192.168.0.137:5000/graphql',
+      android: 'http://192.168.0.137:5000/graphql',
     }),
   }),
 });

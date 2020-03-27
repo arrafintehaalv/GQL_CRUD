@@ -4,9 +4,7 @@ import {useQuery} from 'react-apollo';
 import {Text} from 'react-native';
 
 const Query = () => {
-  const {loading, error, data} = useQuery(GET_QUERY, {
-    variables: {id: 555},
-  });
+  const {loading, error, data} = useQuery(GET_QUERY);
 
   console.log('data', data);
   if (loading) {
@@ -26,20 +24,18 @@ const Query = () => {
 
   return (
     <>
-      <Text
-        style={{
-          fontSize: 20,
-          color: 'red',
-        }}>{`Romaji: ${data.Media.title.romaji}`}</Text>
-      <Text
-        style={{
-          fontSize: 25,
-        }}>{`English: ${data.Media.title.english}`}</Text>
-      <Text
-        style={{
-          fontSize: 20,
-          color: 'blue',
-        }}>{`Native: ${data.Media.title.native}`}</Text>
+      {data.books.map(book => {
+        return (
+          <Text
+            key={book.id}
+            style={{
+              fontSize: 20,
+              color: 'red',
+            }}>
+            {book.name}
+          </Text>
+        );
+      })}
     </>
   );
 };

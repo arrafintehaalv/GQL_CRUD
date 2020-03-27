@@ -1,23 +1,20 @@
 import gql from 'graphql-tag';
 
 export const GET_QUERY = gql`
-  query($id: Int) {
-    Media(id: $id, type: ANIME) {
+  {
+    books {
+      name
       id
-      title {
-        romaji
-        english
-        native
-      }
     }
   }
 `;
 
 export const SET_QUERY = gql`
-  mutation($mediaId: Int, $status: MediaListStatus) {
-    SaveMediaListEntry(mediaId: $mediaId, status: $status) {
+  mutation authors($id: Int!, $name: String, $age: Int) {
+    updateAuthor(id: $id, name: $name, age: $age) {
       id
-      status
+      name
+      age
     }
   }
 `;
