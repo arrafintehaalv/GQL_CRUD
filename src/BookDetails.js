@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {useQuery} from 'react-apollo';
-import {getBookQuery} from '../gql/queries/Query/query';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {useQuery, useMutation} from 'react-apollo';
+import {
+  getBookQuery,
+  getBooksQuery,
+  deleteBookMutation,
+} from '../gql/queries/Query/query';
 
 const BookDetails = ({selected}) => {
+  const [setInfo] = useMutation(deleteBookMutation);
   const {loading, error, data} = useQuery(getBookQuery, {
     variables: {id: selected},
   });
-  console.log(data);
+
+  console.log('Book Returns', data);
   if (loading) {
     return (
       <>
@@ -50,6 +56,23 @@ const BookDetails = ({selected}) => {
           </View>
         </View>
       )}
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'red',
+          height: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={() =>
+          setInfo({
+            variables: {
+              ID: selected,
+            },
+            refetchQueries: [{query: getBooksQuery}],
+          })
+        }>
+        <Text style={{color: 'white'}}>Delete</Text>
+      </TouchableOpacity>
     </>
   );
 };

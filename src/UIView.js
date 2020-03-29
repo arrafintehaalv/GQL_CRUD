@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {getAuthorsQuery, addBookMutation} from '../gql/queries/Query/query';
+import {addBookMutation} from '../gql/queries/Query/query';
 import {useMutation} from 'react-apollo';
 import Query from './Query';
 import FormList from './FormList';
@@ -27,36 +27,39 @@ const UIView = () => {
             </View>
           </View>
         </View>
-        <TouchableOpacity
-          style={{
-            width: '100%',
-            backgroundColor: '#000',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 80,
-          }}
-          onPress={() => {
-            {
-              {
-                setInfo({
-                  variables: {
-                    name: 'Gaab Alvy',
-                    genre: 'Male',
-                    authorId: 2,
-                  },
-                });
-              }
-            }
-          }}>
-          <Text
-            style={{
-              fontSize: 20,
-              color: 'pink',
-            }}>
-            Mutation
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          backgroundColor: '#000',
+          justifyContent: 'center',
+          alignItems: 'center',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 80,
+        }}
+        onPress={() => {
+          {
+            {
+              setInfo({
+                variables: {
+                  name: 'Gaab Alvy',
+                  genre: 'Male',
+                  authorId: 2,
+                },
+              });
+            }
+          }
+        }}>
+        <Text
+          style={{
+            fontSize: 20,
+            color: 'pink',
+          }}>
+          Mutation
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -64,9 +67,6 @@ const UIView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingHorizontal: 10,
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
   },
   text: {
     fontSize: 20,

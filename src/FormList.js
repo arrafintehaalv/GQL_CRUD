@@ -15,7 +15,7 @@ import {
 } from '../gql/queries/Query/query';
 
 const FormList = () => {
-  const [setInfo, {data}] = useMutation(addBookMutation);
+  const [setInfo] = useMutation(addBookMutation);
   const [book, setBook] = useState('');
   const [genre, setGenre] = useState('');
   const [author, setAuthor] = useState('');

@@ -27,6 +27,14 @@ export const addBookMutation = gql`
   }
 `;
 
+export const deleteBookMutation = gql`
+  mutation($ID: ID) {
+    deleteBook(id: $ID) {
+      id
+    }
+  }
+`;
+
 export const getBookQuery = gql`
   query($id: ID) {
     book(id: $id) {

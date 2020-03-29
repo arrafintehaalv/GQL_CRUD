@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {getBooksQuery, getBookQuery} from '../gql/queries/Query/query';
+import {getBooksQuery} from '../gql/queries/Query/query';
 import {useQuery} from 'react-apollo';
 import {Text, View, StyleSheet} from 'react-native';
 import BookDetails from './BookDetails';
@@ -7,7 +7,7 @@ import BookDetails from './BookDetails';
 const Query = () => {
   const [selected, setSelected] = useState(null);
   const {loading, error, data} = useQuery(getBooksQuery);
-
+  console.log('All Book Data', data);
   if (loading) {
     return (
       <>
@@ -33,6 +33,7 @@ const Query = () => {
             <Text
               onPress={() => {
                 setSelected(book.id);
+                console.log('BookID', book.id);
               }}
               key={book.id}
               style={{
