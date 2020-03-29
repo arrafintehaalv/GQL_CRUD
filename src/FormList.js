@@ -7,8 +7,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useState} from 'react';
+import {compose, graphql, useMutation} from 'react-apollo';
+import {
+  getAuthorsQuery,
+  addBookMutation,
+  getBooksQuery,
+} from '../gql/queries/Query/query';
 
 const FormList = () => {
+  const [setInfo, {data}] = useMutation(addBookMutation);
   const [book, setBook] = useState('');
   const [genre, setGenre] = useState('');
   const [author, setAuthor] = useState('');
@@ -67,7 +74,18 @@ const FormList = () => {
         />
       </View>
       <TouchableOpacity
-        onPress={() => console.log(author, book, genre)}
+        onPress={() => {
+          console.log(author, book, genre);
+
+          setInfo({
+            variables: {
+              name: book,
+              genre: genre,
+              authorId: author,
+            },
+            refetchQueries: [{query: getBooksQuery}],
+          });
+        }}
         style={{
           justifyContent: 'center',
           alignItems: 'center',

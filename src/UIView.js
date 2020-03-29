@@ -7,33 +7,26 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {SET_QUERY} from '../gql/queries/Query/query';
+import {getAuthorsQuery, addBookMutation} from '../gql/queries/Query/query';
 import {useMutation} from 'react-apollo';
 import Query from './Query';
 import FormList from './FormList';
 
 const UIView = () => {
-  const [setInfo, {data}] = useMutation(SET_QUERY);
+  const [setInfo, {data}] = useMutation(addBookMutation);
   console.log('Data', data);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fedcba'}}>
-      <View style={styles.container}>
-        <ScrollView>
-          <View style={{paddingTop: '10%'}}>
-            <Text style={styles.text}>Books List</Text>
-          </View>
-
-          <View>
-            <Query />
-          </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#abcabc'}}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Query />
           <View style={{paddingTop: '10%', alignItems: 'center'}}>
             <Text style={styles.text}>Create Book</Text>
             <View style={{paddingTop: 10}}>
               <FormList />
             </View>
           </View>
-        </ScrollView>
-
+        </View>
         <TouchableOpacity
           style={{
             width: '100%',
@@ -46,7 +39,11 @@ const UIView = () => {
             {
               {
                 setInfo({
-                  variables: {id: '3', name: 'Goru', age: 24},
+                  variables: {
+                    name: 'Gaab Alvy',
+                    genre: 'Male',
+                    authorId: 2,
+                  },
                 });
               }
             }
@@ -59,7 +56,7 @@ const UIView = () => {
             Mutation
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -67,13 +64,13 @@ const UIView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    // paddingHorizontal: 10,
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
   },
   text: {
-    fontSize: 30,
+    fontSize: 20,
     color: 'green',
-    paddingTop: '10%',
   },
 });
 
