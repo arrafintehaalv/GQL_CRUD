@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const getBooksQuery = gql`
   {
-    books {
+    books @client {
       name
       id
     }
@@ -21,8 +21,8 @@ export const getAuthorsQuery = gql`
 export const addBookMutation = gql`
   mutation($name: String!, $genre: String!, $authorId: ID!) {
     addBook(name: $name, genre: $genre, authorId: $authorId) {
-      name
-      id
+      name @client
+      id @client
     }
   }
 `;
@@ -51,5 +51,16 @@ export const getBookQuery = gql`
         }
       }
     }
+  }
+`;
+
+export const getLangQuery = gql`
+  {
+    language @client
+  }
+`;
+export const setLangQuery = gql`
+  mutation setLang($language: String) {
+    setLang(language: $language) @client
   }
 `;

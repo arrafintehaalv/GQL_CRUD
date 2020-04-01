@@ -1,20 +1,28 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Text,
 } from 'react-native';
-import {addBookMutation} from '../gql/queries/Query/query';
-import {useMutation} from 'react-apollo';
+import {
+  addBookMutation,
+  getLangQuery,
+  setLangQuery,
+  getBooksQuery,
+} from '../gql/queries/Query/query';
+import {useMutation, useQuery} from 'react-apollo';
 import Query from './Query';
 import FormList from './FormList';
 
 const UIView = () => {
-  const [setInfo, {data}] = useMutation(addBookMutation);
-  console.log('Data', data);
+  const {language} = useQuery(getLangQuery).data;
+  const [setLanguage, {data}] = useMutation(setLangQuery);
+  const [setInfo] = useMutation(addBookMutation);
+  console.log('Data', data, language);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#abcabc'}}>
       <ScrollView>
@@ -48,8 +56,14 @@ const UIView = () => {
                   genre: 'Male',
                   authorId: 2,
                 },
+                refetchQueries: [{query: getBooksQuery}],
               });
             }
+            setLanguage({
+              variables: {
+                language: 'bd',
+              },
+            });
           }
         }}>
         <Text
